@@ -4,12 +4,23 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": "parcel src/index.html"
+        "dev:app": "parcel src/app/index.html",
+        "dev:server": "nodemon src/server/index.js",
+        "dev": "concurrently \"npm run dev:app\" \"npm run dev:server\"",
+        "build": "parcel build src/app/index.html --out-dir src/server/public",
+        "start": "node src/server/index.js"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "axios": "^0.18.0",
+        "body-parser": "^1.18.3",
+        "compression": "^1.7.3",
+        "express": "^4.16.3",
+        "helmet": "^3.13.0",
         "moment": "^2.22.2",
+        "mongoose": "^5.2.14",
+        "morgan": "^1.9.1",
         "react": "^16.5.0",
         "react-dom": "^16.5.0"
     },
@@ -19,6 +30,8 @@
         "babel-preset-env": "^1.7.0",
         "babel-preset-react": "^6.24.1",
         "babel-preset-stage-0": "^6.24.1",
+        "concurrently": "^4.0.1",
+        "cssnano": "^4.1.0",
         "node-sass": "^4.9.3"
     }
 }
