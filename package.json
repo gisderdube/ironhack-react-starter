@@ -9,7 +9,7 @@
         "dev": "concurrently \"npm run dev:app\" \"npm run dev:server\"",
         "build": "parcel build src/app/index.html --out-dir src/server/public",
         "start": "NODE_ENV=production node src/server/index.js",
-        "heroku-postinstall": "npm run build"
+        "heroku-postbuild": "npm run build"
     },
     "author": "Lukas Gisder-Dubé",
     "license": "ISC",
@@ -33,6 +33,7 @@
         "babel-preset-stage-0": "^6.24.1",
         "concurrently": "^4.0.1",
         "cssnano": "^4.1.0",
-        "node-sass": "^4.9.3"
+        "node-sass": "^4.9.3",
+        "parcel-bundler": "^1.9.7"
     }
 }
