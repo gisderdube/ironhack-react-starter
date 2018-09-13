@@ -12,7 +12,7 @@ class Application extends React.Component {
     render() {
         return (
             <div className="container">
-                <h1>Let's get started with React!</h1>
+                <h1>Build something great!</h1>
             </div>
         )
     }
