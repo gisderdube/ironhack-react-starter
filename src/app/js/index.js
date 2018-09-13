@@ -1,7 +1,13 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 
-import Application from './Application'
+function renderApp() {
+    const Application = require('./Application').default
+    ReactDOM.render(<Application />, document.getElementById('app'))
+}
 
-const appContainer = document.getElementById('app')
-ReactDOM.render(<Application />, appContainer)
+renderApp()
+
+if (module.hot) {
+    module.hot.accept(renderApp)
+}

@@ -4,9 +4,9 @@
     "description": "Easy to use, mern boilerplate. Ready to deploy to heroku, no further configuration required.",
     "main": "index.js",
     "scripts": {
-        "dev:app": "parcel src/app/index.html",
+        "dev:app": "parcel watch src/app/index.html",
         "dev:server": "nodemon --watch src/server src/server/index.js",
-        "dev": "concurrently \"npm run dev:app\" \"npm run dev:server\"",
+        "dev": "concurrently -n app,server -c green,blue \"npm run dev:app\" \"npm run dev:server\"",
         "build": "parcel build src/app/index.html --out-dir src/server/public/app --public-url /app",
         "start": "NODE_ENV=production node src/server/index.js",
         "heroku-postbuild": "npm run build"
@@ -35,6 +35,7 @@
         "concurrently": "^4.0.1",
         "cssnano": "^4.1.0",
         "node-sass": "^4.9.3",
-        "parcel-bundler": "^1.9.7"
+        "parcel-bundler": "^1.9.7",
+        "react-hot-loader": "^4.3.7"
     }
 }
