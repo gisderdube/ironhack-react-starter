@@ -1,3 +1,4 @@
 node_modules/
 dist/
 .cache/
+src/server/public/app/

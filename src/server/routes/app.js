@@ -5,7 +5,7 @@ const router = express.Router()
 const config = require('../config')
 
 router.get('/*', (req, res) => {
-    const indexPath = config.IS_PRODUCTION ? '../public/index.html' : '../../../dist/index.html'
+    const indexPath = config.IS_PRODUCTION ? '../public/app/index.html' : '../../../dist/index.html'
     res.sendFile(path.join(__dirname, indexPath))
 })
 
