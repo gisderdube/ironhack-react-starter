@@ -1,7 +1,7 @@
 {
     "name": "mern-boilerplate",
     "version": "1.0.0",
-    "description": "",
+    "description": "Easy to use, mern boilerplate. Ready to deploy to heroku, no further configuration required.",
     "main": "index.js",
     "scripts": {
         "dev:app": "parcel src/app/index.html",
