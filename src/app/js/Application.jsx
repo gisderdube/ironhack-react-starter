@@ -8,13 +8,13 @@ import api from './utils/api'
 
 class Application extends React.Component {
     componentDidMount() {
-        api.get('/api/protected')
-            .then(data => {
-                console.log(data)
-            })
-            .catch(err => {
-                console.log(err.description)
-            })
+        // api.get('/api/protected')
+        //     .then(data => {
+        //         console.log(data)
+        //     })
+        //     .catch(err => {
+        //         console.log(err.description)
+        //     })
     }
 
     render() {
