@@ -29,6 +29,15 @@ class SignUp extends React.Component {
                 />
                 <br />
                 <br />
+                <input
+                    type="file"
+                    value={this.props.picture}
+                    onChange={evt => this.props.handleInputChange('picture', evt.target.files[0])}
+                    className="input"
+                    placeholder="Profile Picture"
+                />
+                <br />
+                <br />
                 <button className="button" onClick={() => this.props.sign('up')}>
                     Sign Up
                 </button>

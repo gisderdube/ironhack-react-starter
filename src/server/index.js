@@ -7,6 +7,7 @@ const compression = require('compression')
 const mongoose = require('mongoose')
 const chalk = require('chalk')
 const fs = require('fs')
+const fileUpload = require('express-fileupload')
 
 const config = require('./config')
 
@@ -23,6 +24,7 @@ const server = express()
 server.use(helmet())
 server.use(morgan('dev'))
 server.use(compression())
+server.use(fileUpload())
 server.use(bodyParser.json())
 
 if (!config.IS_PRODUCTION) {

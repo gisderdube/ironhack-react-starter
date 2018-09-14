@@ -7,6 +7,8 @@ class Profile extends Component {
 
         return (
             <div className="container">
+                <img src={this.props.user.profilePicture} alt="" />
+                <br />
                 {this.props.user._id}
                 <br />
                 {this.props.user.email}

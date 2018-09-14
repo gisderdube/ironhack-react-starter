@@ -16,6 +16,7 @@ class Auth extends Component {
         this.state = {
             email: '',
             password: '',
+            picture: undefined,
             error: '',
         }
 
@@ -73,7 +74,13 @@ class Auth extends Component {
             error: '',
         })
 
-        api.post(`/api/auth/sign-${type}`, { email: this.state.email, password: this.state.password })
+        const pictureDeclaration = type === 'up' && { picture: this.state.picture }
+
+        api.post(
+            `/api/auth/sign-${type}`,
+            { email: this.state.email, password: this.state.password },
+            pictureDeclaration
+        )
             .then(data => {
                 localStorage.setItem('identity', data.token)
                 this.props.setUser()

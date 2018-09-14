@@ -20,11 +20,9 @@ const Navigation = props => {
                 </div>
                 <div>
                     {props.user ? (
-                        <span>
-                            <Link className="link nav-link" to="/auth/logout">
-                                Logout
-                            </Link>
-                        </span>
+                        <Link className="link nav-link" to="/auth/logout">
+                            Logout
+                        </Link>
                     ) : (
                         <span>
                             <Link className="link nav-link" to="/auth/sign-in">
