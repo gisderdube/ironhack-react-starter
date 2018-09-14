@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
 import api from '../utils/api'
 
 import SignUp from './SignUp'
+import Logout from './Logout'
 import SignIn from './SignIn'
 import NotFound from '../NotFound'
 
@@ -22,7 +24,6 @@ class Auth extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <Switch>
                 <Route
@@ -51,6 +52,11 @@ class Auth extends Component {
                         />
                     )}
                 />
+                <Route
+                    exact
+                    path="/auth/logout"
+                    render={() => <Logout resetUser={this.props.resetUser} />}
+                />
                 <Route component={NotFound} />
             </Switch>
         )
@@ -70,6 +76,7 @@ class Auth extends Component {
         api.post(`/api/auth/sign-${type}`, { email: this.state.email, password: this.state.password })
             .then(data => {
                 localStorage.setItem('identity', data.token)
+                this.props.setUser()
                 this.props.history.push('/')
             })
             .catch(err => {
@@ -80,4 +87,4 @@ class Auth extends Component {
     }
 }
 
-export default Auth
+export default withRouter(Auth)
