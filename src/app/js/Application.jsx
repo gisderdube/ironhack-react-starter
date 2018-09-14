@@ -1,19 +1,19 @@
 import React from 'react'
 import axios from 'axios'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+
+import Auth from './Auth'
+import NotFound from './NotFound'
 
 class Application extends React.Component {
-    componentDidMount() {
-        // REMOVE in production, this is just a sample
-        axios.get('/api').then(result => {
-            console.log(result.data)
-        })
-    }
-
     render() {
         return (
-            <div className="container">
-                <h1>Build something great!</h1>
-            </div>
+            <BrowserRouter>
+                <Switch>
+                    <Route path="/auth" component={Auth} />
+                    <Route component={NotFound} />
+                </Switch>
+            </BrowserRouter>
         )
     }
 }
