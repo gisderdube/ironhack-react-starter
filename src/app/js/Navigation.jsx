@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { observer } from 'mobx-react'
 
-const Navigation = props => {
+import UserStore from './Store/User'
+
+const Navigation = () => {
     return (
         <div className="navigation">
             <div className="container nav-content">
@@ -9,7 +12,7 @@ const Navigation = props => {
                     <Link className="link nav-link" to="/">
                         Home
                     </Link>
-                    {props.user && (
+                    {UserStore._id && (
                         <span>
                             &nbsp; &nbsp; &nbsp;
                             <Link className="link nav-link" to="/profile">
@@ -19,7 +22,7 @@ const Navigation = props => {
                     )}
                 </div>
                 <div>
-                    {props.user ? (
+                    {UserStore._id ? (
                         <Link className="link nav-link" to="/auth/logout">
                             Logout
                         </Link>
@@ -40,4 +43,4 @@ const Navigation = props => {
     )
 }
 
-export default Navigation
+export default observer(Navigation)

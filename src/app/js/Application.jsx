@@ -8,20 +8,9 @@ import Home from './Home'
 import Navigation from './Navigation'
 import Profile from './Profile'
 import NotFound from './NotFound'
-import api from './utils/api'
 import UserStore from './Store/User'
 
-@observer
 class Application extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {}
-
-        this._setUser = () => {}
-        this._resetUser = () => {}
-    }
-
     componentDidMount() {
         UserStore.setUser()
     }
@@ -30,26 +19,17 @@ class Application extends React.Component {
         return (
             <BrowserRouter>
                 <div>
-                    <Navigation user={this.state.user} />
+                    <Navigation />
                     <Switch>
-                        <Route exact path="/" render={() => <Home user={this.state.user} />} />
-                        <Route exact path="/profile" render={() => <Profile user={this.state.user} />} />
-                        <Route
-                            path="/auth"
-                            render={() => <Auth setUser={this._setUser} resetUser={this._resetUser} />}
-                        />
+                        <Route exact path="/" component={Home} />
+                        <Route exact path="/profile" component={Profile} />
+                        <Route path="/auth" component={Auth} />
                         <Route component={NotFound} />
                     </Switch>
                 </div>
             </BrowserRouter>
         )
     }
-
-    _resetUser() {
-        this.setState({
-            user: null,
-        })
-    }
 }
 
-export default Application
+export default observer(Application)

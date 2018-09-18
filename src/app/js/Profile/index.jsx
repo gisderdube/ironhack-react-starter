@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
+import { observer } from 'mobx-react'
 
+import UserStore from '../Store/User'
+
+@observer
 class Profile extends Component {
     render() {
-        if (!this.props.user) return <Redirect to="/auth/sign-in" /> // this is actually the protection
+        if (!UserStore._id) return <Redirect to="/auth/sign-in" /> // this is actually the protection
 
         return (
             <div className="container">
-                <img src={this.props.user.profilePicture} alt="" />
+                <img src={UserStore.profilePicture} alt="" />
                 <br />
-                {this.props.user._id}
+                {UserStore._id}
                 <br />
-                {this.props.user.email}
+                {UserStore.email}
             </div>
         )
     }

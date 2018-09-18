@@ -3,7 +3,7 @@ import jwtDecode from 'jwt-decode'
 
 class UserStore {
     @observable
-    id = null
+    _id = null
 
     @observable
     email = null
@@ -13,17 +13,22 @@ class UserStore {
 
     @action
     setUser = () => {
-        console.log('BEFORE', toJS(this))
         const token = localStorage.getItem('identity')
         if (token) {
             const decoded = jwtDecode(token)
             delete decoded.iat
 
-            this.id = decoded._id
+            this._id = decoded._id
             this.email = decoded.email
             this.profilePicture = decoded.profilePicture
         }
-        console.log('AFTER', toJS(this))
+    }
+
+    @action
+    resetUser = () => {
+        this._id = null
+        this.email = null
+        this.profilePicture = null
     }
 }
 

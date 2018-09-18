@@ -9,6 +9,8 @@ import Logout from './Logout'
 import SignIn from './SignIn'
 import NotFound from '../NotFound'
 
+import UserStore from '../Store/User'
+
 class Auth extends Component {
     constructor(props) {
         super(props)
@@ -53,11 +55,7 @@ class Auth extends Component {
                         />
                     )}
                 />
-                <Route
-                    exact
-                    path="/auth/logout"
-                    render={() => <Logout resetUser={this.props.resetUser} />}
-                />
+                <Route exact path="/auth/logout" component={Logout} />
                 <Route component={NotFound} />
             </Switch>
         )
@@ -83,7 +81,7 @@ class Auth extends Component {
         )
             .then(data => {
                 localStorage.setItem('identity', data.token)
-                this.props.setUser()
+                UserStore.setUser()
                 this.props.history.push('/')
             })
             .catch(err => {
