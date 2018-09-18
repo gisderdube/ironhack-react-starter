@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import jwtDecode from 'jwt-decode'
+import { observer } from 'mobx-react'
 
 import Auth from './Auth'
 import Home from './Home'
@@ -9,21 +9,21 @@ import Navigation from './Navigation'
 import Profile from './Profile'
 import NotFound from './NotFound'
 import api from './utils/api'
+import UserStore from './Store/User'
 
+@observer
 class Application extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = {
-            user: this._setUser(true),
-        }
+        this.state = {}
 
-        this._setUser = this._setUser.bind(this)
-        this._resetUser = this._resetUser.bind(this)
+        this._setUser = () => {}
+        this._resetUser = () => {}
     }
 
     componentDidMount() {
-        this._setUser()
+        UserStore.setUser()
     }
 
     render() {
@@ -49,18 +49,6 @@ class Application extends React.Component {
         this.setState({
             user: null,
         })
-    }
-
-    _setUser(init) {
-        const token = localStorage.getItem('identity')
-        if (token) {
-            const decoded = jwtDecode(token)
-            delete decoded.iat
-            if (init) return decoded
-            this.setState({ user: decoded })
-        } else {
-            return null
-        }
     }
 }
 

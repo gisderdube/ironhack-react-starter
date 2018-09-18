@@ -11,7 +11,6 @@ router.get('/', (req, res) => {
 })
 
 router.get('/protected', checkLoggedIn, (req, res) => {
-    console.log('USER', req.user)
     res.send({ success: true })
 })
 
