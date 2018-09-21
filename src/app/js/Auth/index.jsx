@@ -92,6 +92,13 @@ class Auth extends Component {
                 })
             })
     }
+
+    _updateUser() {
+        api.post('/api/auth/post', { age: 25 }).then(data => {
+            localStorage.setItem('identity', data.token)
+            this.props.setUser()
+        })
+    }
 }
 
 export default withRouter(Auth)

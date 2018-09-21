@@ -51,7 +51,10 @@ const bodyRequest = (type, endpoint, body, files, uploadProgress) => {
             onUploadProgress:
                 uploadProgress && typeof uploadProgress === 'function' ? uploadProgress : undefined,
         })
-            .then(result => resolve(result.data))
+            .then(result => {
+                if (result.token) localStorage.setItem('identity', result.token)
+                resolve(result.data)
+            })
             .catch(err => {
                 if (err && err.response && err.response.data && err.response.data.error) {
                     err.description = err.response.data.error

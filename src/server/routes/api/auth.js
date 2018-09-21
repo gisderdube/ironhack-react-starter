@@ -22,10 +22,11 @@ router.post('/sign-up', (req, res) => {
             return new User({ email, password: hashedPassword, profilePicture: pictureUrl }).save()
         })
         .then(user => {
-            const token = jwt.sign(
-                { _id: user._id, email: user.email, profilePicture: user.profilePicture },
-                config.SECRET_JWT_PASSPHRASE
-            )
+            const cleanUser = user.toObject()
+
+            delete cleanUser.password
+
+            const token = jwt.sign(cleanUser, config.SECRET_JWT_PASSPHRASE)
             res.send({ token })
         })
 })
@@ -42,14 +43,22 @@ router.post('/sign-in', (req, res) => {
 
         if (!passwordsMatch) return res.status(400).send({ error: 'Password is incorrect.' })
 
-        const token = jwt.sign(
-            {
-                _id: existingUser._id,
-                email: existingUser.email,
-                profilePicture: existingUser.profilePicture,
-            },
-            config.SECRET_JWT_PASSPHRASE
-        )
+        const cleanUser = existingUser.toObject()
+
+        delete cleanUser.password
+
+        const token = jwt.sign(cleanUser, config.SECRET_JWT_PASSPHRASE)
+        res.send({ token })
+    })
+})
+
+router.post('/update', (req, res) => {
+    User.findByIdAndUpdate(req.user._id, { age: req.body.age }, { new: true }).then(newUser => {
+        const cleanUser = newUser.toObject()
+
+        delete cleanUser.password
+
+        const token = jwt.sign(cleanUser, config.SECRET_JWT_PASSPHRASE)
         res.send({ token })
     })
 })
